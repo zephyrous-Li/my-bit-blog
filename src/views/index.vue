@@ -1,3 +1,7 @@
 <template>
-  <h1>hello world</h1>
+  <Navigation />
 </template>
+
+<script setup>
+import Navigation from "@/components/navigation/src/navigation.vue";
+</script>

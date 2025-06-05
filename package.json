@@ -1,7 +1,7 @@
 {
   "name": "my-blog",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,6 +14,9 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.7",
     "vite": "^6.3.5"
   }
 }
