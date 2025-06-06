@@ -9,7 +9,15 @@ const list = [
       { name: "关注3", path: "/" },
     ],
   },
-  { name: "观点", path: "/" },
+  {
+    name: "观点",
+    path: "/",
+    subList: [
+      { name: "关注1", path: "/" },
+      { name: "关注2", path: "/" },
+      { name: "关注3", path: "/" },
+    ],
+  },
   { name: "研习", path: "/" },
   { name: "分享", path: "/" },
   { name: "行色", path: "/" },
@@ -27,10 +35,11 @@ const list = [
     </div>
 
     <!-- 中间：导航菜单 -->
-    <div class="nav-section center">
+    <div class="nav-section center" style="margin-right: 120px">
       <ul class="nav-menu">
         <li v-for="item in list" :key="item.name" class="menu-item">
           <router-link :to="item.path">{{ item.name }}</router-link>
+          <!-- <img src="@/assets/up.png" alt="arrow" class="arrow" /> -->
           <ul class="sub-menu" v-if="item.subList">
             <li v-for="subItem in item.subList" :key="subItem.name">
               <router-link :to="subItem.path">{{ subItem.name }}</router-link>
@@ -99,7 +108,7 @@ const list = [
   gap: 20px; /* 菜单项间距 */
 }
 
-.nav-menu li a,
+.nav-menu li,
 .nav-menu li .router-link-exact-active {
   color: #333;
   text-decoration: none;
@@ -124,17 +133,27 @@ const list = [
 }
 
 .sub-menu {
-  display: none;
   position: absolute;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-width: 100px;
   z-index: 1;
-  top: 130%;
-  left: 50%; /* 水平居中 */
-  transform: translateX(-50%); /* 水平居中 */
+  top: 42px; /* 紧贴一级菜单下方 */
+  left: 50%;
+  transform: translateX(-50%) scaleY(0); /* 初始高度为 0 */
+  transform-origin: top; /* 动画从顶部开始展开 */
+  opacity: 0;
+  visibility: hidden;
   padding: 10px 0;
-  margin-top: 10px; /* 与一级菜单的间距 */
+  list-style: none;
+  transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* 显示时的状态 */
+.menu-item:hover .sub-menu {
+  transform: translateX(-50%) scaleY(1); /* 展开到原始高度 */
+  opacity: 1;
+  visibility: visible;
 }
 .sub-menu::before {
   content: "";
@@ -144,7 +163,7 @@ const list = [
   transform: translateX(-50%);
   border-width: 0 10px 10px;
   border-style: solid;
-  border-color: transparent transparent hsla(0, 0%, 15%, 0.07); /* 小三角样式 */
+  border-color: transparent transparent #f5f5f5; /* 小三角样式 */
 }
 .sub-menu li {
   padding: 8px 16px;

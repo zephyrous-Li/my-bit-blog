@@ -5,3 +5,4 @@
 <script setup>
 import Navigation from "@/components/navigation/src/navigation.vue";
 </script>
+<style></style>
